@@ -4,7 +4,7 @@
   ## Note to future or else just in case:
   program u/ 'robot transporter' 2 driver H L298n, 4 Motor(s) 600rpm, 2 Servo(s) untuk gripper, 1 LCD I2C, dan 1 indikator Buzzer.  
   Dengan konsep mecanum wheel, memungkinkan robot bergerak strafe/crabwalk dan gerakan konvensional dasar.  
-  [Konsep Mecanum Wheel](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Mecanum_wheel_control_principle.svg/1200px-Mecanum_wheel_control_principle.svg.png)
+  [Link Konsep Mecanum Wheel](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Mecanum_wheel_control_principle.svg/1200px-Mecanum_wheel_control_principle.svg.png)
   
   *disesuaikan dengan rulebook Unnes Technoday 2025  
 
@@ -14,10 +14,13 @@
   b0:a7:32:f2:ff:76 -> Ps3 stik yanto  
 
   ## Penjelasan file
-  RRUMS_rtp1 tanpa mekanisme mecanum wheel, hanya mekanisme konvensional  
-  RRUMS_rtp2 dengan mekanisme mecanum wheel, auto gripper dan mode kecepatan(update)  
-  rtp_editServoDeg untuk mencari sudut servo(s) untuk seting gripper closed-lift dan down-open  
-  rtp_easy hanya untuk tes driver & motor  
+  | Nama file | Keterangan |
+  |:----------|:-----------|
+  | RRUMS_rtp1 | tanpa mekanisme mecanum wheel, hanya mekanisme konvensional |
+  | RRUMS_rtp2 | dengan mekanisme mecanum wheel, auto gripper dan mode kecepatan(update) |
+  | rtp_editServoDeg | untuk mencari sudut servo(s) untuk seting gripper closed-lift dan down-open |
+  | rtp_easy | hanya untuk tes driver & motor |
+  | rtp_mecanuum | gerakan dasar mecanum (maju/mundur, strafe, dan rotate) |
 
   ## Library  
   [PS3 Controller](https://github.com/jvpernis/esp32-ps3)   
