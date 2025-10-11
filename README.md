@@ -4,7 +4,7 @@
   11/10/2025; Bahasa;  
   program u/ 'robot transporter' 2 driver H L298n, 4 Motor(s) 600rpm, 2 Servo(s) untuk gripper, 1 LCD I2C, dan 1 indikator Buzzer.  
   Dengan konsep mecanum wheel, memungkinkan robot bergerak strafe/crabwalk dan gerakan konvensional dasar.  
-  ![Konsep Mecanum Wheel](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Mecanum_wheel_control_principle.svg/1200px-Mecanum_wheel_control_principle.svg.png)
+  ![Konsep Mecanum Wheel](https://www.roboteq.com/images/article-images/frontpage/wheel-rotations.jpg)
   
   *disesuaikan dengan rulebook Unnes Technoday 2025  
 
