@@ -1,7 +1,7 @@
 11/10/2025; Bahasa;  
 
   # DIBACA JIR..
-  ## Transporter, kinda.
+  ## Transporter robot? kinda.
   ### Note to future or else just in case:
   program u/ 'robot transporter' 2 driver H L298n, 4 Motor(s) 600rpm, 2 Servo(s) untuk gripper, 1 LCD I2C, dan 1 indikator Buzzer.  
   Dengan konsep mecanum wheel, memungkinkan robot bergerak strafe/crabwalk dan gerakan konvensional dasar.  
