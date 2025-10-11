@@ -28,7 +28,7 @@
   [ESP32 Servo](https://github.com/madhephaestus/ESP32Servo)  
   [LCD I2C](https://github.com/johnrickman/LiquidCrystal_I2C)  
 
-  ## Kontrol program utama(Unnes_rtp2)  
+  ## Kontrol program utama(RRUMS_rtp2)  
   ### gerak utama 
   * Analog kiri Y   = Maju / mundur  
   * Analog kiri X   = strafe Kanan / kiri  
