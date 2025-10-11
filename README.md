@@ -1,7 +1,8 @@
 11/10/2025; Bahasa;  
 
-  # Transporter tapi..
-  ## Note to future or else just in case:
+  # DIBACA JIR..
+  ## Transporter, kinda.
+  ### Note to future or else just in case:
   program u/ 'robot transporter' 2 driver H L298n, 4 Motor(s) 600rpm, 2 Servo(s) untuk gripper, 1 LCD I2C, dan 1 indikator Buzzer.  
   Dengan konsep mecanum wheel, memungkinkan robot bergerak strafe/crabwalk dan gerakan konvensional dasar.  
   [Link Konsep Mecanum Wheel](https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Mecanum_wheel_control_principle.svg/1200px-Mecanum_wheel_control_principle.svg.png)
