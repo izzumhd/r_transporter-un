@@ -26,24 +26,24 @@
 
   ## Kontrol program utama(Unnes_rtp2)  
   ### gerak utama 
-  *Analog kiri Y   = Maju / mundur  
-  *Analog kiri X   = strafe Kanan / kiri  
-  *Analog kanan X  = rotate Kanan / kiri   
-  *L1              = Clamp mode angkat  
-  *R1              = Clamp mode ambil  
+  * Analog kiri Y   = Maju / mundur  
+  * Analog kiri X   = strafe Kanan / kiri  
+  * Analog kanan X  = rotate Kanan / kiri   
+  * L1              = Clamp mode angkat  
+  * R1              = Clamp mode ambil  
 
   ### tambahan
-  *Triangle        = Mode Kecepatan 1, 2, 3  
-  *Circle          = Mode Kec rotasi a, b  
-  *Cross           = Indikator (Buzzer/LED/etc jika dipasang)  
+  * Triangle        = Mode Kecepatan 1, 2, 3  
+  * Circle          = Mode Kec rotasi a, b  
+  * Cross           = Indikator (Buzzer/LED/etc jika dipasang)  
 
   ### belum ada fungsi 
-  *Square  
-  *Dpad Up  
-  *Dpad Left  
-  *Dpad Right  
-  *Ps3 Start  
-  *Ps3 Select  
-  *Analog kanan Y  
+  * Square  
+  * Dpad Up  
+  * Dpad Left  
+  * Dpad Right  
+  * Ps3 Start  
+  * Ps3 Select  
+  * Analog kanan Y  
     
   end notes.  
