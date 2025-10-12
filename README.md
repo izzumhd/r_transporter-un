@@ -1,7 +1,7 @@
   # DIBACA JIR..
   ## Transporter robot? kinda.
   ### Note to future or else just in case:
-  11/10/2025; Bahasa;  
+  11/10/2025; in Bahasa;  
   program u/ 'robot transporter' 2 driver H L298n, 4 DC Motor(s) 600rpm, 2 Servo(s) untuk gripper, 1 LCD I2C, 1 indikator Buzzer, 1 Step-down 12-5V, 1 Switch.  
   Dengan konsep mecanum wheel, memungkinkan robot bergerak strafe/crabwalk dan gerakan konvensional dasar.  
   
@@ -44,6 +44,7 @@
   ### belum ada fungsi 
   * Square  
   * Dpad Up  
+  * Dpad Down  
   * Dpad Left  
   * Dpad Right  
   * Ps3 Start  
