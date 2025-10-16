@@ -31,6 +31,7 @@
   Dpad Up
   Dpad Left
   Dpad Right
+  Ps3 button
   Ps3 Start
   Ps3 Select
   Analog kanan Y
@@ -43,8 +44,8 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 unsigned long prevMillisLCD = 0;
 
 //                   1234567890123456    16
-String teksStatic = "   RR CIHUYY  +1";
-String teksWaiting = "Menunggu Stik...";
+String teksStatic = "   RR CIHUYY  +3";
+String teksWaiting = "Ngenteni Stik...";
 String teksJalan = "Robot Research UMS            ";
 int scrollIndex = 0;
 int scrollDelay = 200;
@@ -103,6 +104,11 @@ void beep(int total, int lama) {
 }
 
 // -------------------- PS3 --------------------
+unsigned long lastPress = 0;
+const unsigned long debounceDelay = 300;
+unsigned long lastPressCircle = 0;
+const unsigned long debounceDelayCircle = 300;
+
 int pwmSpeed = 0;
 int turn = 0;
 int maxPWM = 255;
@@ -113,7 +119,6 @@ float rotateFactor = 1.0;
 void setup() {
   Serial.begin(115200);
   Wire.begin();
-  beep(3, 200);
 
   int pins[] = { IN1, IN2, IN3, IN4, IN5, IN6, IN7, IN8, ENA1, ENB1, ENA2, ENB2 };
   for (int i = 0; i < 12; i++) pinMode(pins[i], OUTPUT);
@@ -130,6 +135,7 @@ void setup() {
   delay(200);
   lcd.backlight();
   lcd.clear();
+  beep(3, 200);
 
   Ps3.attach(notify);
   Ps3.begin("94:54:c5:b7:00:9a");  // stik krtmi
@@ -261,10 +267,9 @@ void setGripper() {
   // }
 
   // ---------------- Custom Mode ------------------
-  unsigned long lastPress = 0;
-  const unsigned long debounceDelay = 300;
-  if (Ps3.data.button.triangle && millis() - lastPress > debounceDelay) {
-    lastPress = millis();
+  if (Ps3.event.button_down.triangle && millis() - lastPressSegitiga > debounceDelay) {
+    lastPressSegitiga = millis();
+
     if (segitiga == 0) {
       maxPWM = 128;
       segitiga = 1;
@@ -275,40 +280,44 @@ void setGripper() {
       maxPWM = 180;
       segitiga = 2;
       teksStatic = "   RR CIHUYY  +2";
-      beep(2, 200);
       Serial.println("Mode kecepatan normal");
+      beep(2, 200);
     } else if (segitiga == 2) {
       maxPWM = 255;
       segitiga = 0;
       teksStatic = "   RR CIHUYY  +3";
+      Serial.println("Mode kecepatan maksimal");
       beep(3, 200);
-      Serial.println("Mode kecepatan maximal");
     }
   }
 
-  unsigned long lastPressCircle = 0;
-  const unsigned long debounceDelayCircle = 300;
-  if (Ps3.data.button.circle && millis() - lastPressCircle > debounceDelayCircle) {
+  if (Ps3.event.button_down.circle && millis() - lastPressCircle > debounceDelay) {
     lastPressCircle = millis();
+
     if (bundar == 0) {
-      rotateFactor = 0.5;
+      rotateFactor = 0.2;
       bundar = 1;
-      teksStatic = "   RR CIHUYY  +b";
+      teksStatic = "   RR CIHUYY  +a";
       beep(1, 150);
-      Serial.println("Mode rotate setengah");
+      Serial.println("Mode rotate nol koma dua");
     } else if (bundar == 1) {
+      rotateFactor = 0.5;
+      bundar = 2;
+      teksStatic = "   RR CIHUYY  +b";
+      beep(2, 150);
+      Serial.println("Mode rotate nol koma lima");
+    } else if (bundar == 2) {
       rotateFactor = 1.0;
       bundar = 0;
-      teksStatic = "   RR CIHUYY  +a";
+      teksStatic = "   RR CIHUYY  +c";
       beep(3, 150);
-      Serial.println("Mode rotate maksimal");
+      Serial.println("Mode rotate satu koma nol");
     }
   }
 
   if (Ps3.data.button.square) {
     // yet to map
   }
-
   // ---------------- manual set(deact) -----------------
   // if (Ps3.data.button.triangle) {
   //   titikS1 = constrain(titikS1 + 1, 90, 150);
