@@ -7,7 +7,6 @@
   Note to future just in case: 
   program u/ 'robot transporter' 2 driver H L298n, 4 Motor(s), 2 Servo(s).
   mecanum wheel movement.
-  *disesuaikan dengan rulebook Unnes Technoday 2025
 
   01/10/2025 n izzumhdh, ESP 32 Dev Module;
   set pin dan mac address
@@ -25,6 +24,8 @@
   Triangle        = Mode Kecepatan 1, 2, 3
   Circle          = Mode Kec rotasi a, b
   Cross           = Indikator (Buzzer/LED/etc jika dipasang)
+  Ps3 Start       = restart ESP (*disable)
+  Ps3 Select      = konfirmasi restart (*disable)
 
   ------------| yet to map |--------------
   Square
@@ -32,10 +33,9 @@
   Dpad Left
   Dpad Right
   Ps3 button
-  Ps3 Start
-  Ps3 Select
   Analog kanan Y
 
+  catatan servo(s) |----------------------
   buka : 110
   turun: 85
   tutup: 140
@@ -49,7 +49,7 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 unsigned long prevMillisLCD = 0;
 
 //                   1234567890123456    16
-String teksStatic = "   RR CIHUYY  +3";
+String teksStatic = "   RR CIHUYY  +1";
 String teksWaiting = "Ngenteni Stik...";
 String teksJalan = "Robot Research UMS            ";
 int scrollIndex = 0;
@@ -114,12 +114,18 @@ const unsigned long debounceDelay = 300;
 unsigned long lastPressCircle = 0;
 const unsigned long debounceDelayCircle = 300;
 
+bool konfirmasiRestart = false;
+bool sedangRestart = false;
+unsigned long waktuMulaiRestart = 0;
+int titikCount = 0;
+
 int pwmSpeed = 0;
 int turn = 0;
-int maxPWM = 127;
+int maxPWM = 127;  // bates kecepatan dc motor (default)
 int segitiga = 0;
 int bundar = 0;
 float rotateFactor = 1.0;
+int a, b;
 
 void setup() {
   Serial.begin(115200);
@@ -161,7 +167,7 @@ void notify() {
   int str = map(rx, -128, 127, -255, 255);
   int rot = map(lx, -128, 127, -255, 255) * rotateFactor;
 
-  // rumus mecanum wheel
+  // rumuse mecanum wheel
   int pwmFL = fwd + str + rot;  // mtr depan kiri
   int pwmFR = fwd - str - rot;  // mtr depan kanan
   int pwmBL = fwd - str + rot;  // mtr blkg kiri
@@ -172,11 +178,11 @@ void notify() {
   pwmBL = constrain(pwmBL, -maxPWM, maxPWM);
   pwmBR = constrain(pwmBR, -maxPWM, maxPWM);
 
-  // jika kebalik tinggal dibalik. contoh: (IN5, IN6, ..) >> (IN6, IN5, ..) dst.
-  setMotor(IN5, IN6, ENA2, pwmFL);  // depan kiri
-  setMotor(IN7, IN8, ENB2, pwmFR);  // depan kanan
-  setMotor(IN1, IN2, ENA1, pwmBL);  // belakang kiri
-  setMotor(IN3, IN4, ENB1, pwmBR);  // belakang kanan
+  // nek kebalik tinggal dibalik. contoh: (IN5, IN6, ..) >> (IN6, IN5, ..) dst.
+  setMotor(IN5, IN6, ENA2, pwmFL);  // ngarep kiri
+  setMotor(IN7, IN8, ENB2, pwmFR);  // ngarep kanan
+  setMotor(IN1, IN2, ENA1, pwmBL);  // mburi kiri
+  setMotor(IN3, IN4, ENB1, pwmBR);  // mburi kanan
 
   Serial.printf("FL:%4d  FR:%4d  BL:%4d  BR:%4d\n", pwmFL, pwmFR, pwmBL, pwmBR);
 }
@@ -193,6 +199,9 @@ void loop() {
   }
 
   setGripper();
+  setKecepatan();
+
+  // restartESP();  // disable sek ben gk ngganggu
 }
 
 void setMotor(int in1, int in2, int en, int pwm) {
@@ -270,9 +279,12 @@ void setGripper() {
   //   beep(2, 200);
   //   Serial.printf("| cap tutup: %d | batang turun: %d |\n", unoTutup, dosNaik);
   // }
+}
 
-  // ---------------- Custom Mode ------------------
-  if (Ps3.event.button_down.triangle) {
+void setKecepatan() {
+  // ---------------- Custom Mode Kecepatan ------------------
+  if (Ps3.event.button_down.triangle && millis() - lastPressSegitiga > debounceDelay) {
+    lastPressSegitiga = millis();
 
     if (segitiga == 0) {
       maxPWM = 128;
@@ -295,7 +307,7 @@ void setGripper() {
     }
   }
 
-  if (Ps3.event.button_down.circle && millis() - lastPressCircle > debounceDelayCircle) {
+  if (Ps3.event.button_down.circle && millis() - lastPressCircle > debounceDelay) {
     lastPressCircle = millis();
 
     if (bundar == 0) {
@@ -384,8 +396,77 @@ void updateBeep() {
 }
 
 void indikatorial() {
+  // klakson cik
   if (Ps3.data.button.cross) {
     digitalWrite(Buzz1, HIGH);
     Serial.println("Beeeeeeep ");
   } else digitalWrite(Buzz1, LOW);
 }
+
+void ngangKang(int nganG, int kanG, int nnK) {
+  // mbuh iki nggo opo
+  switch (nganG) {
+    case 1:
+      setMotor(IN1, IN2, ENA1, nnK);
+      setMotor(IN3, IN4, ENB1, nnK);
+      break;
+    case 2:
+      setMotor(IN5, IN6, ENA2, nnK);
+      setMotor(IN7, IN8, ENB2, nnK);
+      break;
+    default: break;
+  }
+  switch (kanG) {
+    case 1:
+      setMotor(IN1, IN2, ENA1, nnK);
+      setMotor(IN3, IN4, ENB1, nnK);
+      break;
+    case 2:
+      setMotor(IN5, IN6, ENA2, nnK);
+      setMotor(IN7, IN8, ENB2, nnK);
+      break;
+    default: break;
+  }
+}
+
+void restartESP() {
+  // gur nggo restart tok wo
+  if (Ps3.event.button_up.start) {
+    if (!konfirmasiRestart) {
+      konfirmasiRestart = true;
+      teksStatic = "yakin? (select)";
+      Serial.println(teksStatic);
+    } else {
+      konfirmasiRestart = false;
+      teksStatic = "batal reset";
+      Serial.println(teksStatic);
+    }
+  }
+
+  if (konfirmasiRestart && Ps3.event.button_up.select) {
+    konfirmasiRestart = false;
+    sedangRestart = true;
+    waktuMulaiRestart = millis();
+    titikCount = 0;
+    teksStatic = "Mereset ESP..";
+    Serial.println(teksStatic);
+  }
+
+  if (sedangRestart) {
+    if (millis() - waktuMulaiRestart > 300) {
+      waktuMulaiRestart = millis();
+      titikCount++;
+
+      String temp = "Mereset ESP";
+      for (int i = 0; i < titikCount; i++) temp += ".";
+      teksStatic = temp;
+      Serial.println(teksStatic);
+
+      if (titikCount >= 3) {
+        ESP.restart();
+      }
+    }
+  }
+}
+
+// end.
