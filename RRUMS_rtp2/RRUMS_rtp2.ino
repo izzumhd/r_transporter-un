@@ -35,7 +35,12 @@
   Ps3 Start
   Ps3 Select
   Analog kanan Y
-  
+
+  buka : 110
+  turun: 85
+  tutup: 140
+  naik : 125
+
   end notes.
 */
 
@@ -76,10 +81,10 @@ Servo doss;
 int titikS1 = 91;
 int titikS2 = 71;
 
-const int unoBuka = 114;
-const int dosTurun = 70;
-const int unoTutup = 138;
-const int dosNaik = 145;
+const int unoBuka = 110;
+const int dosTurun = 75;
+const int unoTutup = 150;
+const int dosNaik = 170;
 
 bool gripperActive = false;
 unsigned long gripperStart = 0;
@@ -104,14 +109,14 @@ void beep(int total, int lama) {
 }
 
 // -------------------- PS3 --------------------
-unsigned long lastPress = 0;
+unsigned long lastPressSegitiga = 0;
 const unsigned long debounceDelay = 300;
 unsigned long lastPressCircle = 0;
 const unsigned long debounceDelayCircle = 300;
 
 int pwmSpeed = 0;
 int turn = 0;
-int maxPWM = 255;
+int maxPWM = 127;
 int segitiga = 0;
 int bundar = 0;
 float rotateFactor = 1.0;
@@ -267,8 +272,7 @@ void setGripper() {
   // }
 
   // ---------------- Custom Mode ------------------
-  if (Ps3.event.button_down.triangle && millis() - lastPressSegitiga > debounceDelay) {
-    lastPressSegitiga = millis();
+  if (Ps3.event.button_down.triangle) {
 
     if (segitiga == 0) {
       maxPWM = 128;
@@ -291,7 +295,7 @@ void setGripper() {
     }
   }
 
-  if (Ps3.event.button_down.circle && millis() - lastPressCircle > debounceDelay) {
+  if (Ps3.event.button_down.circle && millis() - lastPressCircle > debounceDelayCircle) {
     lastPressCircle = millis();
 
     if (bundar == 0) {
