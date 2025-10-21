@@ -19,6 +19,7 @@
   |:----------|:-----------|
   | RRUMS_rtp1 | tanpa mekanisme mecanum wheel, hanya mekanisme konvensional |
   | RRUMS_rtp2 | dengan mekanisme mecanum wheel, auto gripper dan mode kecepatan(update) |
+  | RRUMS_rtp3 | rtp2 lama |
   | rtp_editServoDeg | untuk mencari sudut servo(s) untuk seting gripper closed-lift dan down-open |
   | rtp_easy | hanya untuk tes driver & motor |
   | rtp_mecanuum | gerakan dasar mecanum (maju/mundur, strafe, dan rotate) |
@@ -40,15 +41,15 @@
   * Triangle        = Mode Kecepatan 1, 2, 3  
   * Circle          = Mode Kec rotasi a, b  
   * Cross           = Indikator (Buzzer/LED/etc jika dipasang)  
+  * Ps3 Start       = Reset ESP (deactivated)
+  * Ps3 Select      = Rst
 
   ### belum ada fungsi 
   * Square  
   * Dpad Up  
   * Dpad Down  
   * Dpad Left  
-  * Dpad Right  
-  * Ps3 Start  
-  * Ps3 Select  
+  * Dpad Right    
   * Analog kanan Y  
     
   end notes.  
