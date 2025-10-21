@@ -2,17 +2,17 @@
   ## Transporter robot? kinda.
   ### Note to future or else just in case:
   11/10/2025; in Bahasa;  
-  program u/ 'robot transporter' 2 driver H L298n, 4 DC Motor(s) 600rpm, 2 Servo(s) untuk gripper, 1 LCD I2C, 1 indikator Buzzer, 1 Step-down 12-5V, 1 Switch.  
+  program u/ 'robot transporter' 2 driver H L298n, 4 DC Motor(s), 2 Servo(s) untuk gripper, 1 LCD I2C, 1 indikator Buzzer, 1 Step-down 12-5V, 1 Switch.  
   Dengan konsep mecanum wheel, memungkinkan robot bergerak strafe/crabwalk dan gerakan konvensional dasar.  
   
   ![Konsep Mecanum Wheel](https://www.roboteq.com/images/article-images/frontpage/wheel-rotations.jpg)
   
-  *disesuaikan dengan rulebook Unnes Technoday 2025  
+  *disesuaikan dengan rulebook Unnes Technoday 2025*  
 
   created 01/10/2025 n izzumhdh, use ESP 32 Dev Module;  
   set pin n mac address  
-  94:54:c5:b7:00:9a -> Ps3 stik krtmi  
-  b0:a7:32:f2:ff:76 -> Ps3 stik yanto  
+  -94:54:c5:b7:00:9a -> Ps3 stik krtmi  
+  -b0:a7:32:f2:ff:76 -> Ps3 stik yanto  
 
   ## Getting Started
   1. Download the main zip file.
@@ -60,4 +60,4 @@
   * Dpad Right    
   * Analog kanan Y  
     
-  end notes.  
+  *end notes. unlicensed*
