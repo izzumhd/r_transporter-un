@@ -24,10 +24,10 @@
   end notes.
 */
 
-#define unoPin 13 // 118 buka, tutup 148
-#define dosPin 32 // 70 rendah, tinggi 145
+#define unoPin 13 
+#define dosPin 32 
 
-Servo servo1;  // 114 buka, 138 tutup
+Servo servo1; 
 Servo servo2;
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
