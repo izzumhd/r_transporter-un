@@ -18,9 +18,9 @@
   1. Download the main zip file.
   2. Download the library file from the link above.
   3. Extract and insert the library file into the Arduino Ide library directory.
-  4. Extract the 'r_transporter-un-main.zip' and open the folder.
-  5. There are many subfolders there, open one of these and open the .ino file.
-  6. dih
+  4. Extract the `r_transporter-un-main.zip` and open the folder.
+  5. There are many subfolders there, open one of these and open the `.ino` file.
+  6. if it doesn't work, go to bed and take a sleep.
 
   ## Penjelasan file
   | Nama file | Keterangan |
