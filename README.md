@@ -25,9 +25,9 @@
   ## Penjelasan file
   | Nama file | Keterangan |
   |:----------|:-----------|
-  | RRUMS_rtp1 | tanpa mekanisme mecanum wheel, hanya mekanisme konvensional |
-  | RRUMS_rtp2 | dengan mekanisme mecanum wheel, auto gripper dan mode kecepatan(update) |
-  | RRUMS_rtp3 | rtp2 lama |
+  | mh_rtp1 | tanpa mekanisme mecanum wheel, hanya mekanisme konvensional |
+  | mh_rtp2 | dengan mekanisme mecanum wheel, auto gripper dan mode kecepatan(update) |
+  | mh_rtp3 | rtp2 lama |
   | rtp_editServoDeg | untuk mencari sudut servo(s) untuk seting gripper closed-lift dan down-open |
   | rtp_easy | hanya untuk tes driver & motor |
   | rtp_mecanuum | gerakan dasar mecanum (maju/mundur, strafe, dan rotate) |
